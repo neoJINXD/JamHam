@@ -12,10 +12,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector3 playerVelocity;
     [SerializeField] private bool groundedPlayer;
     [SerializeField] private float playerSpeed = 2.0f;
+    [SerializeField] private float sprintMultiplier = 2.0f;
     [SerializeField] private float jumpHeight = 1.0f;
     [SerializeField] private float gravityValue = -9.81f;
     [SerializeField] private float rotationSpeed = 4f;
     [SerializeField] InputActionReference movementControl;
+    [SerializeField] PlayerAnimationController animationController;
 
     void Awake()
     {
@@ -43,9 +45,14 @@ public class PlayerController : MonoBehaviour
         // Vector2 movement = movementControl.action.ReadValue<Vector2>();
         // print(movement);
         Vector3 move = new Vector3(movement.x, 0, movement.y);
+        if (controls.Player.Sprint.ReadValue<float>() > 0f)
+        {
+            move *= sprintMultiplier;
+        }
 
         move = move.z * cam.forward + move.x * cam.right;
         move.y = 0f; 
+        animationController.setMovement(move * playerSpeed);
         controller.Move(move * Time.deltaTime * playerSpeed);
 
         // if (move != Vector3.zero)
