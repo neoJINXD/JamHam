@@ -60,3 +60,4 @@ public class PlayerAnimationController : MonoBehaviour
         anim.SetFloat(speedSideHash, speedSide);
     }
 }
+
