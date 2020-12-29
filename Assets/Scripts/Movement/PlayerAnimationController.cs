@@ -30,15 +30,14 @@ public class PlayerAnimationController : MonoBehaviour
 
     void Update()
     {
-        // TODO can prob be optimized
         // TODO should Lerp these for proper blending
-        // TODO use the input system
+        // TODO Missing the side movement when focussing
         isGoingBack = false;
 
         // Forward Movement
         if (controls.Player.Move.ReadValue<Vector2>() != Vector2.zero)
         {
-            print("suc");
+            // print("suc");
             // speedForward = Input.GetKey(KeyCode.LeftShift) ? 4f : 0.5f;
             speedForward = controls.Player.Sprint.ReadValue<float>() > 0f ? 4f : 0.5f;
             // speed += acceleration * Time.deltaTime;

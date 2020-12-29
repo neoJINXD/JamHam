@@ -1322,7 +1322,7 @@ MonoBehaviour:
   sprintMultiplier: 3
   jumpHeight: 1
   gravityValue: -9.81
-  rotationSpeed: 6
+  rotationSpeed: 10
   movementControl: {fileID: 3952766326938488649, guid: 8be5e663cad64864aaccbe6bd8a95d4f, type: 3}
   animationController: {fileID: 4624354609875324876}
 --- !u!1 &5639470995406926938
