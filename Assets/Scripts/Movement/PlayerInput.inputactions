@@ -23,7 +23,7 @@
                 },
                 {
                     "name": "Attack",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "0c291ef4-8248-4198-af8b-1d10e99ac43f",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -31,7 +31,7 @@
                 },
                 {
                     "name": "Focus",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "62dfab44-7674-4280-9e2d-248c1b5e918a",
                     "expectedControlType": "Button",
                     "processors": "",
