@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = false;
         controller = gameObject.GetComponent<CharacterController>();
         cam = Camera.main.transform;
     }
@@ -40,47 +41,35 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
-        // Movement
-        Vector2 movement = controls.Player.Move.ReadValue<Vector2>();
-        // Vector2 movement = movementControl.action.ReadValue<Vector2>();
-        // print(movement);
-        Vector3 move = new Vector3(movement.x, 0, movement.y);
-        if (controls.Player.Sprint.ReadValue<float>() > 0f)
+
+        if (!GameManager.instance.isAttacking)
         {
-            move *= sprintMultiplier;
+            // Movement
+            Vector2 movement = controls.Player.Move.ReadValue<Vector2>();
+            Vector3 move = new Vector3(movement.x, 0, movement.y);
+            if (controls.Player.Sprint.ReadValue<float>() > 0f)
+            {
+                move *= sprintMultiplier;
+            }
+
+            move = move.z * cam.forward + move.x * cam.right;
+            move.y = 0f; 
+            animationController.setMovement(move * playerSpeed);
+            controller.Move(move * Time.deltaTime * playerSpeed);
+
+            // Focus
+            // TODO can add a focus on right click to rotate character with the cam
+            if (movement != Vector2.zero || controls.Player.Focus.ReadValue<float>() > 0f)
+            {
+                float targetAngle = Mathf.Atan2(movement.x, movement.y) * Mathf.Rad2Deg + cam.eulerAngles.y;
+                Quaternion rotation = Quaternion.Euler(0f, targetAngle, 0f);
+                transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+            }
         }
-
-        move = move.z * cam.forward + move.x * cam.right;
-        move.y = 0f; 
-        animationController.setMovement(move * playerSpeed);
-        controller.Move(move * Time.deltaTime * playerSpeed);
-
-        // if (move != Vector3.zero)
-        // {
-        //     gameObject.transform.forward = move;
-        // }
-
-        // Changes the height position of the player..
-        // if (Input.GetButtonDown("Jump") && groundedPlayer)
-        // {
-        //     playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-        // }
-
+        
         // Grravity
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
-
-        // Focus
-
-        // print(controls.Player.Focus.ReadValue<float>());
-
-        // TODO can add a focus on right click to rotate character with the cam
-        if (movement != Vector2.zero || controls.Player.Focus.ReadValue<float>() > 0f)
-        {
-            float targetAngle = Mathf.Atan2(movement.x, movement.y) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            Quaternion rotation = Quaternion.Euler(0f, targetAngle, 0f);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
-        }
     }
 
     void OnEnable() 
