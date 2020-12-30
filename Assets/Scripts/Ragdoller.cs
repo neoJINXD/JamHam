@@ -9,19 +9,29 @@ public class Ragdoller : MonoBehaviour
     Rigidbody[] rigidbodies;
     bool isRagdolled = false;
 
+    private Transform player;
+    private Rigidbody rb;
+
     void Start()
     {
         rigidbodies = GetComponentsInChildren<Rigidbody>();
         ToggleRagdoll(true);
+        player = GameObject.FindWithTag("Player").transform;
+        rb = GetComponent<Rigidbody>();
+        print(rigidbodies[0].name);
     }
 
 
     void OnTriggerEnter(Collider other) 
     {
-        if (!isRagdolled && other.CompareTag("Player"))
+        if (!isRagdolled && other.CompareTag("Sword"))
         {
             ToggleRagdoll(false);
             StartCoroutine(GetBackUp());
+            foreach(Rigidbody bone in rigidbodies)
+            {
+                bone.AddExplosionForce(5f, player.position, 10f, 1f, ForceMode.Impulse);        
+            }
         }
     }
 
@@ -40,6 +50,7 @@ public class Ragdoller : MonoBehaviour
     IEnumerator GetBackUp()
     {
         yield return new WaitForSeconds(vanishTime);
-        ToggleRagdoll(true);
+        // ToggleRagdoll(true);
+        Destroy(gameObject);
     }
 }
