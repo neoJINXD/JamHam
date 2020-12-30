@@ -59,7 +59,7 @@ public class PlayerAnimationController : MonoBehaviour
 
         if (controls.Player.Attack.ReadValue<float>() > 0f)
         {
-            print("pew");
+            // print("pew");
             // anim.SetTrigger(AttackHash1);
             anim.SetBool(AttackHash1, true);
             GameManager.instance.isAttacking = true;
