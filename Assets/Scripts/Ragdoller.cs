@@ -6,6 +6,7 @@ public class Ragdoller : MonoBehaviour
 {
     [SerializeField] Collider coll;
     [SerializeField] float vanishTime = 10f;
+    [SerializeField] Enemy enemy;
     Rigidbody[] rigidbodies;
     bool isRagdolled = false;
 
@@ -18,7 +19,7 @@ public class Ragdoller : MonoBehaviour
         ToggleRagdoll(true);
         player = GameObject.FindWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
-        print(rigidbodies[0].name);
+        // print(rigidbodies[0].name);
     }
 
 
@@ -27,6 +28,7 @@ public class Ragdoller : MonoBehaviour
         if (!isRagdolled && other.CompareTag("Sword"))
         {
             ToggleRagdoll(false);
+            enemy.Die();
             StartCoroutine(GetBackUp());
             foreach(Rigidbody bone in rigidbodies)
             {

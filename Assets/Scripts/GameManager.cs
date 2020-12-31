@@ -5,15 +5,13 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     public bool isAttacking { get; set; }
-    // Start is called before the first frame update
-    void Start()
+
+    public GameObject coil { get; set; }
+   
+    void Awake()
     {
-        
+        base.Awake();
+        coil = GameObject.FindWithTag("Target");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
