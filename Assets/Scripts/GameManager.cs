@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class GameManager : Singleton<GameManager>
 {
-    public bool isAttacking { get; set; }
+    public bool isAttacking;
+    public bool isRewinding;
+
+    public CinemachineFreeLook cam;
 
     public GameObject coil;
     public GameObject player;
@@ -40,7 +44,8 @@ public class GameManager : Singleton<GameManager>
 
         if (coilHealth == 0)
         {
-            // TODO fade out
+            // // TODO fade out
+            Cursor.visible = true;
             SceneManager.LoadScene(3);
         }
 
@@ -91,6 +96,29 @@ public class GameManager : Singleton<GameManager>
     {
         float output = newStart + ((newEnd - newStart) / (end - start)) * (input - start);
         return output;
+    }
+
+    public void Hit()
+    {
+        StartCoroutine(_ProcessShake());
+    }
+
+    private IEnumerator _ProcessShake(float shakeIntensity = 30f, float shakeTiming = 0.5f)
+    {
+        Noise(10, shakeIntensity);
+        yield return new WaitForSeconds(shakeTiming);
+        Noise(0, 0);
+    }
+    public void Noise(float amplitude, float frequency)
+    {
+        cam.GetRig(0).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = amplitude;
+        cam.GetRig(1).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = amplitude;
+        cam.GetRig(2).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = amplitude;
+
+        cam.GetRig(0).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = frequency;
+        cam.GetRig(1).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = frequency;
+        cam.GetRig(2).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_FrequencyGain = frequency;  
+ 
     }
 
 }

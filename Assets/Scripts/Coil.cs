@@ -8,7 +8,6 @@ public class Coil : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            // TODO coil is hit
             print($"COIL HIT {other.name}");    
             GameManager.instance.coilHealth--;
         }  

@@ -58,7 +58,6 @@ public class EnemySpawner : MonoBehaviour
                     AudioManager.instance.Play("nextRound");
                     state = STATE.COUNTING;
                     timer = timeBtwWave;
-                    // TODO Enable the next spawners
                     switch(nextIndex)
                     {
                         case 1:
@@ -94,6 +93,7 @@ public class EnemySpawner : MonoBehaviour
                     if (nextIndex > waves.Length - 1)
                     {
                         // print("COMPLETE");
+                        Cursor.visible = true;
                         SceneManager.LoadScene(2);
                     }
 
