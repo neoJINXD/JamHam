@@ -48,12 +48,16 @@ public class Enemy : MonoBehaviour
             if (distance <= 1.7f)
             {
                 // TODO make sure to attack if close to coil
+                agent.speed = 0f;
                 agent.isStopped = true;
+                anim.SetBool(movingHash, false);
+                anim.SetBool(runHash, false);
+                anim.SetBool(attackHash, true);
             }
             else
             {
                 agent.SetDestination(target.position);
-                StartChasing();
+                // StartChasing();
             }
         }
     }
@@ -80,6 +84,15 @@ public class Enemy : MonoBehaviour
             anim.SetBool(movingHash, true);
             // target = GameManager.instance.coil.transform;
         }
+        anim.SetBool(attackHash, false);
     }
 
+    public void AttackEnd()
+    {
+        distance = Vector3.Distance(transform.position, target.position);
+        if (!(distance <= 1.7f))
+        {
+            StartChasing();
+        }
+    }
 }
