@@ -83,4 +83,13 @@ public class PlayerController : MonoBehaviour
         controls.Disable();
     }
 
+    void OnTriggerEnter(Collider other) 
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            // TODO should stagger player or something
+            print($"GOT HIT {other.name}");    
+        }
+    }
+
 }

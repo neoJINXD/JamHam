@@ -95,4 +95,5 @@ public class Enemy : MonoBehaviour
             StartChasing();
         }
     }
+
 }
