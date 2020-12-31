@@ -15638,11 +15638,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4960808469905869269, guid: 33b033c0741095841bfdf6f0c44ba917, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0027324776
+      value: -0.0027324816
       objectReference: {fileID: 0}
     - target: {fileID: 4960808469905869269, guid: 33b033c0741095841bfdf6f0c44ba917, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.00022046073
+      value: 0.00022046102
       objectReference: {fileID: 0}
     - target: {fileID: 4960808470052744459, guid: 33b033c0741095841bfdf6f0c44ba917, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15658,7 +15658,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4960808470052744459, guid: 33b033c0741095841bfdf6f0c44ba917, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0027324727
+      value: -0.0027324732
       objectReference: {fileID: 0}
     - target: {fileID: 4960808470052744459, guid: 33b033c0741095841bfdf6f0c44ba917, type: 3}
       propertyPath: m_LocalRotation.z
@@ -15722,7 +15722,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4960808470451871544, guid: 33b033c0741095841bfdf6f0c44ba917, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.062281888
+      value: 0.062281884
       objectReference: {fileID: 0}
     - target: {fileID: 4960808470451871544, guid: 33b033c0741095841bfdf6f0c44ba917, type: 3}
       propertyPath: m_LocalRotation.y
@@ -15976,6 +15976,12 @@ MonoBehaviour:
     volume: 0.5
     pitch: 0.5
     loop: 1
+    source: {fileID: 0}
+  - name: nextRound
+    clip: {fileID: 8300000, guid: 8ce2439bd232db5408707dd883f7979d, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
     source: {fileID: 0}
 --- !u!4 &1720842968
 Transform:

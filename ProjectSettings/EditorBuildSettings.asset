@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Bad.unity
     guid: 341c1721ab78b26459c71dd279140b94
+  - enabled: 1
+    path: Assets/Scenes/Troll.unity
+    guid: bd563db02da4c934db22509bf0ac696a
   m_configObjects: {}

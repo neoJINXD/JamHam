@@ -55,6 +55,7 @@ public class EnemySpawner : MonoBehaviour
 
                     nextIndex++;
                     GameManager.instance.currentWave = nextIndex;
+                    AudioManager.instance.Play("nextRound");
                     state = STATE.COUNTING;
                     timer = timeBtwWave;
                     // TODO Enable the next spawners
