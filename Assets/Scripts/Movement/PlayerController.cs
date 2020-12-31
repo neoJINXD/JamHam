@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
 
             if (controls.Player.Sprint.ReadValue<float>() > 0f && timer > crankTimer)
             {
-                // TODO play za warudo sound
+                AudioManager.instance.Play("rewind");
                 StartCoroutine(CRANK());
                 timer = 0f;
             }

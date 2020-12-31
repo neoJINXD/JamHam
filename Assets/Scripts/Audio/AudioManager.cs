@@ -22,6 +22,8 @@ public class AudioManager : Singleton<AudioManager>
            s.source.pitch = s.pitch;
            s.source.loop = s.loop;
        }
+
+       Play("bgm");
     }
 
     // Plays the specified sound

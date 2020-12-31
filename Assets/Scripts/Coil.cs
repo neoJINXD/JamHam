@@ -10,7 +10,7 @@ public class Coil : MonoBehaviour
         {
             // TODO coil is hit
             print($"COIL HIT {other.name}");    
-
-        }
+            GameManager.instance.coilHealth--;
+        }  
     }
 }

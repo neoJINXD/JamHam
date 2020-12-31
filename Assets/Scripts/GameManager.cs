@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -20,6 +21,9 @@ public class GameManager : Singleton<GameManager>
     // [SerializeField]Color glowColor;
     // [SerializeField]Color nonGlowColor;
 
+    public int currentWave = 1;
+    public int coilHealth = 10;
+
     void Awake()
     {
         base.Awake();
@@ -32,6 +36,14 @@ public class GameManager : Singleton<GameManager>
 
     void Update()
     {
+        print($"WE ARE {currentWave+1}");
+
+        if (coilHealth == 0)
+        {
+            // TODO fade out
+            SceneManager.LoadScene(3);
+        }
+
         // is cranking up
         if (isCranking)
         {
@@ -75,7 +87,7 @@ public class GameManager : Singleton<GameManager>
     }
 
 
-    private float Map(float input, float start, float end, float newStart, float newEnd)
+    public float Map(float input, float start, float end, float newStart, float newEnd)
     {
         float output = newStart + ((newEnd - newStart) / (end - start)) * (input - start);
         return output;

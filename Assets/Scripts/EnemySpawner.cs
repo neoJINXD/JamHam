@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -53,6 +54,7 @@ public class EnemySpawner : MonoBehaviour
                     // print("New round started");
 
                     nextIndex++;
+                    GameManager.instance.currentWave = nextIndex;
                     state = STATE.COUNTING;
                     timer = timeBtwWave;
                     // TODO Enable the next spawners
@@ -90,8 +92,8 @@ public class EnemySpawner : MonoBehaviour
 
                     if (nextIndex > waves.Length - 1)
                     {
-                        // TODO Game done
-                        print("COMPLETE");
+                        // print("COMPLETE");
+                        SceneManager.LoadScene(2);
                     }
 
                     return;
