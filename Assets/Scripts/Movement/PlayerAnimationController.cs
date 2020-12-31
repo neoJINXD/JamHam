@@ -36,7 +36,7 @@ public class PlayerAnimationController : MonoBehaviour
         // // TODO Missing the side movement when focussing
         isGoingBack = false;
 
-        if (controls.Player.Attack.ReadValue<float>() > 0f)
+        if (controls.Player.Attack.ReadValue<float>() > 0f && GameManager.instance.weaponCrank > 0f)
         {
 
             anim.SetBool(AttackHash1, true);
