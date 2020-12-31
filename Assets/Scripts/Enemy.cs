@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
     private bool ded = false;
     [SerializeField]private bool isAttackingPlayer;
 
+    [SerializeField]private float distance;
+
     void Awake() 
     {
         // target = GameManager.instance.coil.transform;
@@ -31,24 +33,29 @@ public class Enemy : MonoBehaviour
 
         isAttackingPlayer = Random.Range(0f,1f) <= 0.5 ? true : false;
         if (isAttackingPlayer)
-        {
-            agent.speed = 3f;
-            anim.SetBool(runHash, true);
-        }
+            target = GameObject.FindWithTag("Player").transform;
         else
-        {
-            agent.speed = 0.5f;
-            anim.SetBool(movingHash, true);
-        }
+            target = GameObject.FindWithTag("Target").transform;
+        StartChasing();
     }
 
     void Update() 
     {   
+        distance = Vector3.Distance(transform.position, target.position);
         if (!ded)
         {
-            agent.SetDestination(target.position);
+
+            if (distance <= 1.7f)
+            {
+                // TODO make sure to attack if close to coil
+                agent.isStopped = true;
+            }
+            else
+            {
+                agent.SetDestination(target.position);
+                StartChasing();
+            }
         }
-        // TODO make sure to attack if close to coil
     }
 
     public void Die()
@@ -56,6 +63,23 @@ public class Enemy : MonoBehaviour
         // agent.SetDestination(transform.position);
         ded = true;
         Destroy(agent);
+    }
+
+    private void StartChasing()
+    {
+        agent.isStopped = false;
+        if (isAttackingPlayer)
+        {
+            agent.speed = 3f;
+            anim.SetBool(runHash, true);
+            // target = GameManager.instance.player.transform;
+        }
+        else
+        {
+            agent.speed = 0.5f;
+            anim.SetBool(movingHash, true);
+            // target = GameManager.instance.coil.transform;
+        }
     }
 
 }

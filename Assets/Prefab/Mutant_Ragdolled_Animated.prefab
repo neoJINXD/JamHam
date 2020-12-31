@@ -2660,6 +2660,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   isAttackingPlayer: 0
+  distance: 0
 --- !u!195 &7271868971125298156
 NavMeshAgent:
   m_ObjectHideFlags: 0
