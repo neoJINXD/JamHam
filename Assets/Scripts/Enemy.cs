@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,8 +9,11 @@ public class Enemy : MonoBehaviour
     private Animator anim;
 
     private int movingHash;
+    private int runHash;
+    private int attackHash;
 
     private bool ded = false;
+    [SerializeField]private bool isAttackingPlayer;
 
     void Awake() 
     {
@@ -25,7 +26,20 @@ public class Enemy : MonoBehaviour
         anim = GetComponent<Animator>();
 
         movingHash = Animator.StringToHash("Moving");
-        anim.SetBool(movingHash, true);
+        runHash = Animator.StringToHash("Running");
+        attackHash = Animator.StringToHash("Attack");
+
+        isAttackingPlayer = Random.Range(0f,1f) <= 0.5 ? true : false;
+        if (isAttackingPlayer)
+        {
+            agent.speed = 3f;
+            anim.SetBool(runHash, true);
+        }
+        else
+        {
+            agent.speed = 0.5f;
+            anim.SetBool(movingHash, true);
+        }
     }
 
     void Update() 
