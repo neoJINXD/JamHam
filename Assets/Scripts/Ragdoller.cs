@@ -27,6 +27,7 @@ public class Ragdoller : MonoBehaviour
     {
         if (!isRagdolled && other.CompareTag("Sword"))
         {
+            GameManager.instance.Attack();
             ToggleRagdoll(false);
             enemy.Die();
             StartCoroutine(GetBackUp());

@@ -47,7 +47,6 @@ public class Enemy : MonoBehaviour
 
             if (distance <= 1.7f)
             {
-                // TODO make sure to attack if close to coil
                 agent.speed = 0f;
                 agent.isStopped = true;
                 anim.SetBool(movingHash, false);

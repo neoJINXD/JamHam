@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,6 +19,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float rotationSpeed = 4f;
     [SerializeField] InputActionReference movementControl;
     [SerializeField] PlayerAnimationController animationController;
+
+    public float timer = 0f;
+    public float crankTimer = 10f;
 
     void Awake()
     {
@@ -47,10 +51,10 @@ public class PlayerController : MonoBehaviour
             // Movement
             Vector2 movement = controls.Player.Move.ReadValue<Vector2>();
             Vector3 move = new Vector3(movement.x, 0, movement.y);
-            if (controls.Player.Sprint.ReadValue<float>() > 0f)
-            {
+            // if (controls.Player.Sprint.ReadValue<float>() > 0f)
+            // {
                 move *= sprintMultiplier;
-            }
+            // }
 
             move = move.z * cam.forward + move.x * cam.right;
             move.y = 0f; 
@@ -58,13 +62,22 @@ public class PlayerController : MonoBehaviour
             controller.Move(move * Time.deltaTime * playerSpeed);
 
             // Focus
-            // TODO can add a focus on right click to rotate character with the cam
+            // // TODO can add a focus on right click to rotate character with the cam
             if (movement != Vector2.zero || controls.Player.Focus.ReadValue<float>() > 0f)
             {
                 float targetAngle = Mathf.Atan2(movement.x, movement.y) * Mathf.Rad2Deg + cam.eulerAngles.y;
                 Quaternion rotation = Quaternion.Euler(0f, targetAngle, 0f);
                 transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
             }
+
+            if (controls.Player.Sprint.ReadValue<float>() > 0f && timer > crankTimer)
+            {
+                // TODO play za warudo sound
+                StartCoroutine(CRANK());
+                timer = 0f;
+            }
+
+            timer += Time.deltaTime;
         }
         
         // Grravity
@@ -90,6 +103,14 @@ public class PlayerController : MonoBehaviour
             // TODO should stagger player or something
             print($"GOT HIT {other.name}");    
         }
+    }
+
+    IEnumerator CRANK()
+    {
+        // print("CRANK IT UP");
+        GameManager.instance.crankTarget = 0f;
+        GameManager.instance.isCranking = true;
+        yield return null;
     }
 
 }

@@ -44,3 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keepAlive: 1
+  coil: {fileID: 0}
+  player: {fileID: 0}
+  health: 0
+  weaponCrank: 100
+  swordGlowMat: {fileID: 2100000, guid: 145f81f34964dff418092f25291c2248, type: 2}

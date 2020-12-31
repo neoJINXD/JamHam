@@ -16,52 +16,31 @@ public class PlayerAnimationController : MonoBehaviour
     private bool isGoingBack = false;
     private Vector2 movement;
 
-    // public Queue<int> attackQueue;
-    // private int[] AttackHashes;
     private int AttackHash1;
-    // private int AttackHash2;
-    // private int AttackHash3;
 
-    // List<int> animList;
-    // public int attackCounter = 0;
-    // public float reset = 0f;
-    // public float resetTime = 1f;
-
-
-    // [SerializeField] float acceleration = 0.1f;
-    // [SerializeField] float deceleration = 0.5f;
     void Awake()
     {
         controls = new PlayerInputControls();
     }
     void Start()
     {
-        // anim = GetComponent<Animator>();
         speedForwardHash = Animator.StringToHash("SpeedForward");
         speedSideHash = Animator.StringToHash("SpeedSide");
         speedHash = Animator.StringToHash("Speed");
-
-        // AttackHashes = new int[3];
-        
         AttackHash1 = Animator.StringToHash("Attacking");
-        // AttackHashes[0] = Animator.StringToHash("Attack1");
-        // AttackHashes[1] = Animator.StringToHash("Attack2");
-        // AttackHashes[2] = Animator.StringToHash("Attack3");
-        
-        // attackQueue = new Queue<int>();
     }
 
     void Update()
     {
-        // TODO should Lerp these for proper blending
-        // TODO Missing the side movement when focussing
+        // // TODO should Lerp these for proper blending
+        // // TODO Missing the side movement when focussing
         isGoingBack = false;
 
         if (controls.Player.Attack.ReadValue<float>() > 0f)
         {
-            // print("pew");
-            // anim.SetTrigger(AttackHash1);
+
             anim.SetBool(AttackHash1, true);
+
             GameManager.instance.isAttacking = true;
             
         }
@@ -73,7 +52,8 @@ public class PlayerAnimationController : MonoBehaviour
             {
                 // print("suc");
                 // speedForward = Input.GetKey(KeyCode.LeftShift) ? 4f : 0.5f;
-                speedForward = controls.Player.Sprint.ReadValue<float>() > 0f ? 4f : 0.5f;
+                // speedForward = controls.Player.Sprint.ReadValue<float>() > 0f ? 4f : 0.5f;
+                speedForward = 4f;
                 // speed += acceleration * Time.deltaTime;
             }
             // else if (Input.GetKey(KeyCode.S))
